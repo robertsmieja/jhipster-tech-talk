@@ -76,6 +76,8 @@
       "ua",
       "uz-lat",
       "vi"
-    ]
+    ],
+    "herokuAppName": "robertsmieja-jhipster",
+    "herokuDeployType": "git"
   }
 }
