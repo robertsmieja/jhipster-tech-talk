@@ -77,7 +77,7 @@
       "uz-lat",
       "vi"
     ],
-    "herokuAppName": "robertsmieja-jhipster",
+    "herokuAppName": "jhipster-tech-talk",
     "herokuDeployType": "git"
   }
 }
