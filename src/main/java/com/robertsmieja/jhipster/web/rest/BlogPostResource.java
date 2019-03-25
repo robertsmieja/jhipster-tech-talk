@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,11 @@ public class BlogPostResource {
         if (blogPost.getId() != null) {
             throw new BadRequestAlertException("A new blogPost cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (blogPost.getEntryTimestamp() == null) {
+            blogPost.setEntryTimestamp(Instant.now());
+        }
+
         BlogPost result = blogPostRepository.save(blogPost);
         return ResponseEntity.created(new URI("/api/blog-posts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

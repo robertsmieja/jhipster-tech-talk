@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <changeSet id="20190325023912-3" author="Robert Smieja">
+        <addDefaultValue tableName="blog_post" columnName="entry_timestamp" defaultValueComputed="${now}"/>
+        <modifyDataType tableName="blog_post" columnName="text" newDataType="varchar(5000)" />
+    </changeSet>
+</databaseChangeLog>

@@ -34,7 +34,7 @@ public class BlogPost implements Serializable {
 
     @NotNull
     @Column(name = "entry_timestamp", nullable = false)
-    private Instant entryTimestamp;
+    private Instant entryTimestamp = Instant.now();
 
     @ManyToOne
     @JsonIgnoreProperties("blogPosts")
