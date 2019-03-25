@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const path = require('path');
 
 const utils = require('./utils.js');
@@ -97,7 +96,6 @@ module.exports = options => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: `'${options.env}'`,
-        BUILD_TIMESTAMP: `'${new Date().getTime()}'`,
         VERSION: `'${utils.parseVersion()}'`,
         DEBUG_INFO_ENABLED: options.env === 'development',
         // The root URL for API calls, ending with a '/' - for example: `"https://www.jhipster.tech:8081/myservice/"`.
@@ -123,55 +121,6 @@ module.exports = options => ({
       template: './src/main/webapp/index.html',
       chunksSortMode: 'dependency',
       inject: 'body'
-    }),
-    new MergeJsonWebpackPlugin({
-      output: {
-        groupBy: [
-                    { pattern: "./src/main/webapp/i18n/en/*.json", fileName: "./i18n/en.json" },
-                    { pattern: "./src/main/webapp/i18n/al/*.json", fileName: "./i18n/al.json" },
-                    { pattern: "./src/main/webapp/i18n/ar-ly/*.json", fileName: "./i18n/ar-ly.json" },
-                    { pattern: "./src/main/webapp/i18n/hy/*.json", fileName: "./i18n/hy.json" },
-                    { pattern: "./src/main/webapp/i18n/by/*.json", fileName: "./i18n/by.json" },
-                    { pattern: "./src/main/webapp/i18n/bn/*.json", fileName: "./i18n/bn.json" },
-                    { pattern: "./src/main/webapp/i18n/ca/*.json", fileName: "./i18n/ca.json" },
-                    { pattern: "./src/main/webapp/i18n/zh-cn/*.json", fileName: "./i18n/zh-cn.json" },
-                    { pattern: "./src/main/webapp/i18n/zh-tw/*.json", fileName: "./i18n/zh-tw.json" },
-                    { pattern: "./src/main/webapp/i18n/cs/*.json", fileName: "./i18n/cs.json" },
-                    { pattern: "./src/main/webapp/i18n/da/*.json", fileName: "./i18n/da.json" },
-                    { pattern: "./src/main/webapp/i18n/nl/*.json", fileName: "./i18n/nl.json" },
-                    { pattern: "./src/main/webapp/i18n/et/*.json", fileName: "./i18n/et.json" },
-                    { pattern: "./src/main/webapp/i18n/fa/*.json", fileName: "./i18n/fa.json" },
-                    { pattern: "./src/main/webapp/i18n/fr/*.json", fileName: "./i18n/fr.json" },
-                    { pattern: "./src/main/webapp/i18n/gl/*.json", fileName: "./i18n/gl.json" },
-                    { pattern: "./src/main/webapp/i18n/de/*.json", fileName: "./i18n/de.json" },
-                    { pattern: "./src/main/webapp/i18n/el/*.json", fileName: "./i18n/el.json" },
-                    { pattern: "./src/main/webapp/i18n/hi/*.json", fileName: "./i18n/hi.json" },
-                    { pattern: "./src/main/webapp/i18n/hu/*.json", fileName: "./i18n/hu.json" },
-                    { pattern: "./src/main/webapp/i18n/id/*.json", fileName: "./i18n/id.json" },
-                    { pattern: "./src/main/webapp/i18n/it/*.json", fileName: "./i18n/it.json" },
-                    { pattern: "./src/main/webapp/i18n/ja/*.json", fileName: "./i18n/ja.json" },
-                    { pattern: "./src/main/webapp/i18n/ko/*.json", fileName: "./i18n/ko.json" },
-                    { pattern: "./src/main/webapp/i18n/mr/*.json", fileName: "./i18n/mr.json" },
-                    { pattern: "./src/main/webapp/i18n/my/*.json", fileName: "./i18n/my.json" },
-                    { pattern: "./src/main/webapp/i18n/pl/*.json", fileName: "./i18n/pl.json" },
-                    { pattern: "./src/main/webapp/i18n/pt-br/*.json", fileName: "./i18n/pt-br.json" },
-                    { pattern: "./src/main/webapp/i18n/pt-pt/*.json", fileName: "./i18n/pt-pt.json" },
-                    { pattern: "./src/main/webapp/i18n/ro/*.json", fileName: "./i18n/ro.json" },
-                    { pattern: "./src/main/webapp/i18n/ru/*.json", fileName: "./i18n/ru.json" },
-                    { pattern: "./src/main/webapp/i18n/sk/*.json", fileName: "./i18n/sk.json" },
-                    { pattern: "./src/main/webapp/i18n/sr/*.json", fileName: "./i18n/sr.json" },
-                    { pattern: "./src/main/webapp/i18n/es/*.json", fileName: "./i18n/es.json" },
-                    { pattern: "./src/main/webapp/i18n/sv/*.json", fileName: "./i18n/sv.json" },
-                    { pattern: "./src/main/webapp/i18n/tr/*.json", fileName: "./i18n/tr.json" },
-                    { pattern: "./src/main/webapp/i18n/ta/*.json", fileName: "./i18n/ta.json" },
-                    { pattern: "./src/main/webapp/i18n/te/*.json", fileName: "./i18n/te.json" },
-                    { pattern: "./src/main/webapp/i18n/th/*.json", fileName: "./i18n/th.json" },
-                    { pattern: "./src/main/webapp/i18n/ua/*.json", fileName: "./i18n/ua.json" },
-                    { pattern: "./src/main/webapp/i18n/uz-lat/*.json", fileName: "./i18n/uz-lat.json" },
-                    { pattern: "./src/main/webapp/i18n/vi/*.json", fileName: "./i18n/vi.json" }
-                    // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
-                ]
-      }
     }),
   ]
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Alert, Table, Button } from 'reactstrap';
-import { Translate } from 'react-jhipster';
+
 import { getSession } from 'app/shared/reducers/authentication';
 import { IRootState } from 'app/shared/reducers';
 import { findAll, invalidateSession } from './sessions.reducer';
@@ -28,26 +28,20 @@ export class SessionsPage extends React.Component<ISessionsProps> {
     return (
       <div>
         <h2>
-          <Translate contentKey="sessions.title" interpolate={{ username: account.login }}>
-            Active sessions for [<b>{account.login}</b>]
-          </Translate>
+          Active sessions for [<b>{account.login}</b>]
         </h2>
 
         {updateSuccess ? (
           <Alert color="success">
-            <Translate contentKey="sessions.messages.success">
-              <strong>Session invalidated!</strong>
-            </Translate>
+            <strong>Session invalidated!</strong>
           </Alert>
         ) : null}
 
         {updateFailure ? (
           <Alert color="danger">
-            <Translate contentKey="sessions.messages.error">
-              <span>
-                <strong>An error has occurred!</strong> The session could not be invalidated.
-              </span>
-            </Translate>
+            <span>
+              <strong>An error has occurred!</strong> The session could not be invalidated.
+            </span>
           </Alert>
         ) : null}
 
@@ -59,15 +53,9 @@ export class SessionsPage extends React.Component<ISessionsProps> {
           <Table className="table-striped">
             <thead>
               <tr>
-                <th>
-                  <Translate contentKey="sessions.table.ipaddress">IP Address</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="sessions.table.useragent">User agent</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="sessions.table.date">Date</Translate>
-                </th>
+                <th>IP Address</th>
+                <th>User agent</th>
+                <th>Date</th>
                 <th />
               </tr>
             </thead>
@@ -80,7 +68,7 @@ export class SessionsPage extends React.Component<ISessionsProps> {
                   <td>{s.tokenDate}</td>
                   <td>
                     <Button color="primary" onClick={this.doSessionInvalidation(s.series)}>
-                      <Translate contentKey="sessions.table.button">Invalidate</Translate>
+                      Invalidate
                     </Button>
                   </td>
                 </tr>

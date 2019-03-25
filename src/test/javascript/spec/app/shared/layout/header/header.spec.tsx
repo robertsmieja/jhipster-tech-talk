@@ -1,25 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import sinon from 'sinon';
-
 import LoadingBar from 'react-redux-loading-bar';
 import { Navbar, Nav } from 'reactstrap';
 
 import { Home, Brand } from 'app/shared/layout/header/header-components';
-import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu } from 'app/shared/layout/header/menus';
+import { AdminMenu, EntitiesMenu, AccountMenu } from 'app/shared/layout/header/menus';
 import Header from 'app/shared/layout/header/header';
 
 describe('Header', () => {
   let mountedWrapper;
 
-  const localeSpy = sinon.spy();
-
   const devProps = {
     isAuthenticated: true,
     isAdmin: true,
-    currentLocale: 'en',
-    onLocaleChange: localeSpy,
     ribbonEnv: 'dev',
     isInProduction: false,
     isSwaggerEnabled: true
@@ -65,7 +59,6 @@ describe('Header', () => {
     expect(nav.find(Home).length).toEqual(1);
     expect(nav.find(AdminMenu).length).toEqual(1);
     expect(nav.find(EntitiesMenu).length).toEqual(1);
-    expect(nav.find(LocaleMenu).length).toEqual(1);
 
     expect(nav.find(AccountMenu).length).toEqual(1);
     const ribbon = component.find('.ribbon.dev');
@@ -84,7 +77,6 @@ describe('Header', () => {
     expect(nav.find(Home).length).toEqual(1);
     expect(nav.find(AdminMenu).length).toEqual(1);
     expect(nav.find(EntitiesMenu).length).toEqual(1);
-    expect(nav.find(LocaleMenu).length).toEqual(1);
 
     expect(nav.find(AccountMenu).length).toEqual(1);
     const ribbon = component.find('.ribbon.dev');
