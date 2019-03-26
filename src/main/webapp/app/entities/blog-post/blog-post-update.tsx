@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, Label } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
+import moment from 'moment';
 // tslint:disable-next-line:no-unused-variable
 import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +16,7 @@ import { IBlogPost } from 'app/shared/model/blog-post.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
+import { APP_LOCAL_DATETIME_FORMAT } from 'app/config/constants';
 
 export interface IBlogPostUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
@@ -86,7 +88,7 @@ export class BlogPostUpdate extends React.Component<IBlogPostUpdateProps, IBlogP
             ) : (
               <AvForm model={isNew ? {} : blogPostEntity} onSubmit={this.saveEntity}>
                 {!isNew ? (
-                  <AvGroup>
+                  <AvGroup hidden="true">
                     <Label for="id">ID</Label>
                     <AvInput id="blog-post-id" type="text" className="form-control" name="id" required readOnly />
                   </AvGroup>
@@ -97,7 +99,7 @@ export class BlogPostUpdate extends React.Component<IBlogPostUpdateProps, IBlogP
                   </Label>
                   <AvField
                     id="blog-post-text"
-                    type="text"
+                    type="textarea"
                     name="text"
                     validate={{
                       required: { value: true, errorMessage: 'This field is required.' },
@@ -114,8 +116,11 @@ export class BlogPostUpdate extends React.Component<IBlogPostUpdateProps, IBlogP
                     type="datetime-local"
                     className="form-control"
                     name="entryTimestamp"
-                    placeholder={'YYYY-MM-DD HH:mm'}
-                    value={isNew ? null : convertDateTimeFromServer(this.props.blogPostEntity.entryTimestamp)}
+                    value={
+                      isNew
+                        ? moment().format(APP_LOCAL_DATETIME_FORMAT)
+                        : convertDateTimeFromServer(this.props.blogPostEntity.entryTimestamp)
+                    }
                     validate={{
                       required: { value: true, errorMessage: 'This field is required.' }
                     }}
